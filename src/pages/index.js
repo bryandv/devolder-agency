@@ -3,7 +3,7 @@ import {useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
-import {Wrapper, Image, BottomEdgeDown,BottomEdgeUp,Artist} from "./pageStyles/pageStyles"
+import {Wrapper, Image, BottomEdgeDown,BottomEdgeUp,Artist} from "../pageStyles/pageStyles"
 import {COLORS} from "../constants"
 
 const IndexPage = () => {
@@ -41,7 +41,7 @@ const IndexPage = () => {
         }
         homePageFeaturedArtists {
           ... on WPGraphql_Artist {
-            id
+            slug
             artist {
               artistName
               firstName
@@ -90,7 +90,7 @@ const IndexPage = () => {
           <h2>Featured Artists</h2>
           <div className="artist-items">
             {homePageFeaturedArtists.map(({artist, slug}) => (
-              <Artist to={`/${slug}`}>
+              <Artist key={slug} to={`/${slug}`}>
                 <Image
                   fluid={artist.profile.imageFile.childImageSharp.fluid}
                   alt={artist.profile.altText}
